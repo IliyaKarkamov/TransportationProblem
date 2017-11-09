@@ -1,4 +1,4 @@
-// ---------------------------------------------------------------------------
+п»ї// ---------------------------------------------------------------------------
 
 #include "stdafx.h"
 
@@ -43,17 +43,17 @@ void TransportProblem::AddCustomerNeeds(int nAmount)
 
 void TransportProblem::Solve()
 {
-    // Проверява се Сума ai == Сума bj, Ако не се добавя фиктивен A или B.
+    // РџСЂРѕРІРµСЂСЏРІР° СЃРµ РЎСѓРјР° ai = РЎСѓРјР° bj, РђРєРѕ РЅРµ СЃРµ РґРѕР±Р°РІСЏ С„РёРєС‚РёРІРµРЅ A РёР»Рё B.
     EqualizeGoodsAndNeeds();
 
-    // Чертаем начален опорен план (таблицата) и използваме един от методите и попълваме Xij
+    // Р§РµСЂС‚Р°РµРј РЅР°С‡Р°Р»РµРЅ РѕРїРѕСЂРµРЅ РїР»Р°РЅ (С‚Р°Р±Р»РёС†Р°С‚Р°) Рё РёР·РїРѕР»Р·РІР°РјРµ РµРґРёРЅ РѕС‚ РјРµС‚РѕРґРёС‚Рµ Рё РїРѕРїСЉР»РІР°РјРµ Xij
     DoNorthwestCornerMethod();
 
-    // Намираме Z(Xi) = max от t на пълните клетки (tke)
-    // Намираме Xij с t >= tke и зачеркваме.
-    // За клетка Xke построяваме обходна линия Kke - Ако съществува продължаваме иначе край
-    // Определяме min от отрицателните клетки
-    // Правим нов опорен план -> и пак..
+    // РќР°РјРёСЂР°РјРµ Z(Xi) = max РѕС‚ t РЅР° РїСЉР»РЅРёС‚Рµ РєР»РµС‚РєРё (tke)
+	// РќР°РјРёСЂР°РјРµ Xij СЃ t >= tke Рё Р·Р°С‡РµСЂРєРІР°РјРµ.
+	// Р—Р° РєР»РµС‚РєР° Xke РїРѕСЃС‚СЂРѕСЏРІР°РјРµ РѕР±С…РѕРґРЅР° Р»РёРЅРёСЏ Kke - РђРєРѕ СЃСЉС‰РµСЃС‚РІСѓРІР° РїСЂРѕРґСЉР»Р¶Р°РІР°РјРµ РёРЅР°С‡Рµ РєСЂР°Р№
+	// РћРїСЂРµРґРµР»СЏРјРµ min РѕС‚ РѕС‚СЂРёС†Р°С‚РµР»РЅРёС‚Рµ РєР»РµС‚РєРё
+	// РџСЂР°РІРёРј РЅРѕРІ РѕРїРѕСЂРµРЅ РїР»Р°РЅ -> Рё РїР°Рє..
     while (true)
     {
         const auto& maxElem = m_matrix.FindUsedElementMaxTime();
@@ -88,11 +88,11 @@ void TransportProblem::Solve()
 
 void TransportProblem::EqualizeGoodsAndNeeds()
 {
-    // Изчисляваме сумите
+    // РР·С‡РёСЃР»СЏРІР°РјРµ СЃСѓРјРёС‚Рµ
     const auto aTsum = accumulate(m_aT.begin(), m_aT.end(), 0);
     const auto bsum = accumulate(m_b.begin(), m_b.end(), 0);
 
-    // Подравняваме двата вектора
+    // РџРѕРґСЂР°РІРЅСЏРІР°РјРµ РґРІР°С‚Р° РІРµРєС‚РѕСЂР°
     if (aTsum > bsum)
     {
         const auto nDiff = aTsum - bsum;
@@ -175,7 +175,7 @@ bool TransportProblem::FindSurroundingRouteForElement(const MatrixElement& elem,
 
     std::stack<PathNode> stack;
 
-    //Има ли поне една точка по хоризонтала и една по вертикала
+    // РђРєРѕ РЅСЏРјР° СЃРІРѕР±РѕРґРЅР° С‚РѕС‡РєР° РїРѕ С…РѕСЂРёР·РѕРЅС‚Р°Р»Р° Рё РїРѕ РІРµСЂС‚РёРєР°Р»Р° -> РєСЂР°Р№
     auto bHasHorizontal = false;
     auto bHasVertical = false;
 
@@ -190,7 +190,7 @@ bool TransportProblem::FindSurroundingRouteForElement(const MatrixElement& elem,
     if (!bHasVertical || !bHasHorizontal)
         return false;
 
-    // Намираме началните точки
+    // РќР°РјРёСЂР°РјРµ РЅР°С‡Р°Р»РЅРёС‚Рµ С‚РѕС‡РєРё Рё РїРѕСЃРѕРєРё
     for (auto iPos = 0; iPos < nM; iPos++)
     {
         if (iPos == elem.i)
@@ -209,8 +209,8 @@ bool TransportProblem::FindSurroundingRouteForElement(const MatrixElement& elem,
         stack.top().bIsHorizontalFirst = false;
     }
 
-    // За всяка начална точка търсим съседите, съседите на съседите и т.н.
-    // докато не стигнем до крайната точка
+    // Р—Р° РІСЃСЏРєР° РЅР°С‡Р°Р»РЅР° С‚РѕС‡РєР° С‚СЉСЂСЃРёРј СЃСЉСЃРµРґРёС‚Рµ, СЃСЉСЃРµРґРёС‚Рµ РЅР° СЃСЉСЃРµРґРёС‚Рµ Рё С‚.РЅ.
+	// РґРѕРєР°С‚Рѕ РЅРµ СЃС‚РёРіРЅРµРј РґРѕ РєСЂР°Р№РЅР°С‚Р° С‚РѕС‡РєР°
     while (!stack.empty())
     {
         auto curr = stack.top();
@@ -219,7 +219,7 @@ bool TransportProblem::FindSurroundingRouteForElement(const MatrixElement& elem,
             curr.currElement.i == elem.i &&
             curr.currElement.j == elem.j)
         {
-            // Имаме победител		
+            // РРјР°РјРµ РїРѕР±РµРґРёС‚РµР»		
             route.swap(curr.route);
             return true;
         }
@@ -267,7 +267,7 @@ bool TransportProblem::FindSurroundingRouteForElement(const MatrixElement& elem,
         }
     }
 
-    // Няма обходен маршрут
+    // РќСЏРјР° РѕР±С…РѕРґРµРЅ РјР°СЂС€СЂСѓС‚
     return false;
 }
 
@@ -317,7 +317,6 @@ std::istream& operator>>(std::istream& is, TransportProblem& obj)
 
     if (!g_bLoadedFromFile)
     {
-        // Вход на aT
         std::cout << " - Vhodni danni za aT:" << std::endl;
     }
 
@@ -336,7 +335,6 @@ std::istream& operator>>(std::istream& is, TransportProblem& obj)
 
     if (!g_bLoadedFromFile)
     {
-        // Вход на b
         std::cout << " - Vhodni danni za b:" << std::endl;
     }
 

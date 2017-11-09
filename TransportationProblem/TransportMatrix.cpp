@@ -1,4 +1,4 @@
-// ---------------------------------------------------------------------------
+ï»¿// ---------------------------------------------------------------------------
 
 #include "stdafx.h"
 
@@ -122,7 +122,7 @@ void TransportMatrix::DoSurroundingRouteValueChanges(SurroundingRoute& route, co
                                                 return lhs.nValue < rhs.nValue;
                                             }).first->nValue;
 
-    route.pop_back(); // òîâà å íà÷àëíàòà òî÷êà òÿ íå íè òðÿáâà
+    route.pop_back(); // Ñ‚Ð¾Ð²Ð° Ðµ Ð½Ð°Ñ‡Ð°Ð»Ð½Ð°Ñ‚Ð° Ñ‚Ð¾Ñ‡ÐºÐ° Ñ‚Ñ Ð½Ðµ Ð½Ð¸ Ñ‚Ñ€ÑÐ±Ð²Ð°
 
     if (m_matrix[startElem.i][startElem.j].nValue != EMPTY_VALUE)
         m_matrix[startElem.i][startElem.j].nValue -= nValue;
@@ -180,7 +180,7 @@ std::istream& operator>>(std::istream& is, TransportMatrix& obj)
             obj.m_nN << std::endl;
     }
 
-    // Âõîä íà ìàòðèöàòà
+    // Ð’Ñ…Ð¾Ð´ Ð½Ð° Ð¼Ð°Ñ‚Ñ€Ð¸Ñ†Ð°Ñ‚Ð°
     for (auto i = 0; i < obj.m_nM; i++)
     {
         for (auto j = 0; j < obj.m_nN; j++)
