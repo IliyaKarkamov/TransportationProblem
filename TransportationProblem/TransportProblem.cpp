@@ -50,10 +50,10 @@ void TransportProblem::Solve()
     DoNorthwestCornerMethod();
 
     // Намираме Z(Xi) = max от t на пълните клетки (tke)
-	// Намираме Xij с t >= tke и зачеркваме.
-	// За клетка Xke построяваме обходна линия Kke - Ако съществува продължаваме иначе край
-	// Определяме min от отрицателните клетки
-	// Правим нов опорен план -> и пак..
+    // Намираме Xij с t >= tke и зачеркваме.
+    // За клетка Xke построяваме обходна линия Kke - Ако съществува продължаваме иначе край
+    // Определяме min от отрицателните клетки
+    // Правим нов опорен план -> и пак..
     while (true)
     {
         const auto& maxElem = m_matrix.FindUsedElementMaxTime();
@@ -210,7 +210,7 @@ bool TransportProblem::FindSurroundingRouteForElement(const MatrixElement& elem,
     }
 
     // За всяка начална точка търсим съседите, съседите на съседите и т.н.
-	// докато не стигнем до крайната точка
+    // докато не стигнем до крайната точка
     while (!stack.empty())
     {
         auto curr = stack.top();
